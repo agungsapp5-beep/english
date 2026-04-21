@@ -2,38 +2,99 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Buat Soal</title>
 
 <style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
 body {
-  font-family: Arial;
   background: linear-gradient(135deg,#667eea,#764ba2);
-  padding:20px;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
 }
+
 .container {
-  max-width:800px;
-  margin:auto;
+  width: 100%;
+  max-width: 800px;
 }
+
 .card {
-  background:white;
-  padding:20px;
-  border-radius:10px;
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
 }
+
+h2 {
+  margin-bottom: 15px;
+  font-size: 22px;
+  text-align: center;
+}
+
 textarea {
-  width:100%;
-  padding:10px;
-  margin-top:10px;
+  width: 100%;
+  min-height: 120px;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  resize: vertical;
+  font-size: 16px;
 }
+
 button {
-  margin-top:10px;
-  padding:10px;
-  border:none;
-  background:#667eea;
-  color:white;
-  border-radius:6px;
+  width: 100%;
+  margin-top: 12px;
+  padding: 12px;
+  border: none;
+  background: #667eea;
+  color: white;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.2s;
 }
+
+button:hover {
+  background: #5563d6;
+}
+
 .back-btn {
-  background:#444;
+  background: #444;
+  margin-bottom: 12px;
+}
+
+.back-btn:hover {
+  background: #222;
+}
+
+/* RESPONSIVE TAMBAHAN */
+@media (max-width: 600px) {
+  .card {
+    padding: 15px;
+  }
+
+  h2 {
+    font-size: 18px;
+  }
+
+  textarea {
+    min-height: 100px;
+    font-size: 14px;
+  }
+
+  button {
+    font-size: 14px;
+    padding: 10px;
+  }
 }
 </style>
 </head>
@@ -42,7 +103,7 @@ button {
 
 <div class="container">
 
-<button class="back-btn" onclick="location.href='index.php'">⬅ Kembali</button>
+<button class="back-btn" onclick="location.href='index.html'">⬅ Kembali</button>
 
 <div class="card">
 <h2>Tambah Soal</h2>
