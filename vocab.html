@@ -72,6 +72,7 @@ textarea {
   border-radius:8px;
   border:1px solid #ccc;
   box-sizing:border-box;
+  font-size:16px;
 }
 
 button.submit {
@@ -83,6 +84,7 @@ button.submit {
   border:none;
   border-radius:8px;
   cursor:pointer;
+  font-size:16px;
 }
 
 .item {
@@ -113,19 +115,25 @@ button.submit {
   background:white;
   border:1px solid #ccc;
   border-top:none;
-  max-height:200px;
+  max-height:250px;
   overflow-y:auto;
   z-index:100;
   border-radius:0 0 8px 8px;
+  box-shadow:0 5px 15px rgba(0,0,0,0.1);
 }
 
 .suggestion-item {
   padding:10px;
   cursor:pointer;
+  border-bottom:1px solid #eee;
 }
 
 .suggestion-item:hover {
   background:#f0f0f0;
+}
+
+.suggestion-item small {
+  color:#666;
 }
 </style>
 </head>
@@ -165,7 +173,7 @@ button.submit {
       <input 
         type="text"
         id="searchInput"
-        placeholder="Search vocabulary..."
+        placeholder="Search word or meaning..."
         onkeyup="searchVocab()"
       >
 
@@ -269,7 +277,7 @@ function render(data){
   });
 }
 
-/* SEARCH */
+/* SEARCH WORD + MEANING */
 function searchVocab(){
   const keyword = document
     .getElementById("searchInput")
@@ -284,14 +292,25 @@ function searchVocab(){
     return;
   }
 
+  // FILTER DATA
   const filtered = dataList.filter(item =>
-    item.word.toLowerCase().includes(keyword)
+    item.word.toLowerCase().includes(keyword) ||
+    item.meaning.toLowerCase().includes(keyword)
   );
 
   render(filtered);
 
-  /* SHOW SUGGESTIONS */
+  // SHOW SUGGESTIONS
   suggestions.innerHTML = "";
+
+  if(filtered.length === 0){
+    suggestions.innerHTML = `
+      <div class="suggestion-item">
+        No vocabulary found
+      </div>
+    `;
+    return;
+  }
 
   filtered.slice(0,5).forEach(item => {
     suggestions.innerHTML += `
@@ -299,7 +318,8 @@ function searchVocab(){
         class="suggestion-item"
         onclick="selectSuggestion('${item.word}')"
       >
-        ${item.word}
+        <b>${item.word}</b><br>
+        <small>${item.meaning}</small>
       </div>
     `;
   });
